@@ -1,5 +1,6 @@
 package com.leo.srpingmongodb.resources;
 
+import com.leo.srpingmongodb.domain.Post;
 import com.leo.srpingmongodb.domain.User;
 import com.leo.srpingmongodb.dto.UserDTO;
 import com.leo.srpingmongodb.service.UserService;
@@ -55,6 +56,13 @@ public class UserResouce {
         obj.setId(id);
         obj= service.update(obj);
         return ResponseEntity.noContent().build();
+    }
+
+
+    @GetMapping("/{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id){
+        User obj = service.findByID(id);
+        return ResponseEntity.ok().body(obj.getPosts());
     }
 
 }
