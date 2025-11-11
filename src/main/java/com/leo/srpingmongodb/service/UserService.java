@@ -1,6 +1,7 @@
 package com.leo.srpingmongodb.service;
 
 import com.leo.srpingmongodb.domain.User;
+import com.leo.srpingmongodb.dto.UserDTO;
 import com.leo.srpingmongodb.repository.UserRepository;
 import com.leo.srpingmongodb.service.Exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,4 +25,11 @@ public class UserService {
                 .orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
     }
 
+    public User insert(User obj){
+        return repo.insert(obj);
+    }
+
+    public User fromDTO(UserDTO objDto){
+        return new User(objDto.getId(),objDto.getName(),objDto.getEmail());
+    }
 }
