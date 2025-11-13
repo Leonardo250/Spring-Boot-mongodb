@@ -3,6 +3,7 @@ package com.leo.srpingmongodb.resources;
 import com.leo.srpingmongodb.domain.Post;
 import com.leo.srpingmongodb.domain.User;
 import com.leo.srpingmongodb.dto.UserDTO;
+import com.leo.srpingmongodb.resources.util.URL;
 import com.leo.srpingmongodb.service.PostService;
 import com.leo.srpingmongodb.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,13 @@ public class PostResouce {
     public ResponseEntity<Post> findById(@PathVariable String id){
         Post obj = service.findByID(id);
         return ResponseEntity.ok().body(obj);
+    }
+
+    @GetMapping("/titlesearch")
+    public ResponseEntity<List<Post>> findByTitle(@RequestParam (value = "text", defaultValue = "") String text){
+        text = URL.decodeParam(text);
+        List<Post> list  = service.findByysTitle(text);
+        return ResponseEntity.ok().body(list);
     }
 
 }

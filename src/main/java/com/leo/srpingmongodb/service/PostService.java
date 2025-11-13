@@ -22,5 +22,9 @@ public class PostService {
         return user;
     }
 
+    public List<Post> findByysTitle(String text){
+        return repo.findByTitleContainingIgnoreCase(text);
+    }
+
 
 }
